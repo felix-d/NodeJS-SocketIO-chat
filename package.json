@@ -1,15 +1,16 @@
 {
   "name": "chatapp",
-  "version" : "0.1.0",
+  "version": "0.1.0",
   "description": "A basic chat app using socket.io",
   "author": "Felix D",
   "dependencies": {
-    "express": "4.6.1",
-    "ejs": "1.0.0",
-    "socket.io": "1.0.6",
-    "hogan.js": "~3.0.2",
     "body-parser": "~1.0.0",
-    "express-json": "1.0.0"
+    "ejs": "1.0.0",
+    "express": "4.6.1",
+    "express-json": "1.0.0",
+    "hogan.js": "~3.0.2",
+    "logfmt": "^1.1.2",
+    "socket.io": "1.0.6",
+    "ws": "^0.4.31"
   }
 }
-

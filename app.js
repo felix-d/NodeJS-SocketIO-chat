@@ -1,6 +1,7 @@
 var express = require("express");
 
 var app = express();
+var logfmt = require("logfmt");
 var port = Number(process.env.PORT || 5000);
 var url = require("url");
 var http = require('http');
@@ -17,8 +18,11 @@ var msgs = [];
 // Chargement du fichier index.html affiché au client
 
 // Chargement de socket.io
+global.io.configure(function () {
+    global.io.set("transports", ["xhr-polling"]);
+      global.io.set("polling duration", 10);
+});
 var io = require('socket.io').listen(app.listen(port));
-
 // Quand on client se connecte, on le note dans la console
 app.get("/", function(req,res){
   res.render("index");

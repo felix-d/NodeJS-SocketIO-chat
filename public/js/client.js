@@ -1,4 +1,4 @@
-var socket = io.connect('http://peaceful-cove-7011.herokuapp.com/');
+var socket = io.connect('http://peaceful-cove-7011.herokuapp.com');
 
 function emitToServer(msg){
   socket.emit('message', msg.value);
