@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 var msgs = [];
 // Chargement du fichier index.html affiché au client
 
-var port = process.env.PORT; // Use the port that Heroku provides or default to 5000
+var port = process.env.PORT || 5000; // Use the port that Heroku provides or default to 5000
 server.listen(port);
 
 // Quand on client se connecte, on le note dans la console
