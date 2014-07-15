@@ -33,7 +33,3 @@ io.sockets.on('connection', function (socket) {
     socket.emit('broadcast', message);
   }); 
 });
-
-
-
-
