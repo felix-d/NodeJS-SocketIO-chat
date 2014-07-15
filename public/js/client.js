@@ -1,7 +1,7 @@
 var socket = io.connect(window.location.hostname);
 function emitToServer(msg){
   socket.emit('message', msg.value);
-  $("#msg").val('');
+  $("#msginput").val('');
 }
 
 $(document).ready(function(){
