@@ -1,7 +1,7 @@
 var express = require("express");
 
 var app = express();
-var port = 8080;
+var port = Number(process.env.PORT || 5000);
 var url = require("url");
 var http = require('http');
 var fs = require('fs');
