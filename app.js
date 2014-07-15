@@ -1,20 +1,19 @@
 var express = require("express");
-var logger = require("logger");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-var url = require("url");
-var fs = require('fs');
-var bodyParser = require('body-parser');
-var expressjson = require('express-json');
+// var url = require("url");
+// var fs = require('fs');
+// var bodyParser = require('body-parser');
+// var expressjson = require('express-json');
 
 app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded());
 app.set("views", ".");
 app.set("view engine", "ejs");
-io.set("transports", ["xhr-polling"]);
-io.set("polling duration", 10);
+// io.set("transports", ["xhr-polling"]);
+// io.set("polling duration", 10);
 
 var msgs = [];
 // Chargement du fichier index.html affiché au client
