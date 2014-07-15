@@ -10,6 +10,7 @@
     "express-json": "1.0.0",
     "hogan.js": "~3.0.2",
     "logfmt": "^1.1.2",
+    "logger": "0.0.1",
     "socket.io": "1.0.6",
     "ws": "^0.4.31"
   }

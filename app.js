@@ -1,33 +1,32 @@
 var express = require("express");
-
+var logger = require("logger");
 var app = express();
-var logfmt = require("logfmt");
-var port = Number(process.env.PORT || 5000);
+var server = require('http').Server(app);
+var io = require('socket.io').listen(server);
 var url = require("url");
-var http = require('http');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var expressjson = require('express-json');
-app.set("views", ".");
-app.set("view engine", "ejs");
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.set("views", ".");
+app.set("view engine", "ejs");
+io.set("transports", ["xhr-polling"]);
+io.set("polling duration", 10);
 
 var msgs = [];
 // Chargement du fichier index.html affiché au client
 
-// Chargement de socket.io
-global.io.configure(function () {
-    global.io.set("transports", ["xhr-polling"]);
-      global.io.set("polling duration", 10);
-});
-var io = require('socket.io').listen(app.listen(port));
+var port = process.env.PORT || 5000; // Use the port that Heroku provides or default to 5000
+server.listen(port);
+
 // Quand on client se connecte, on le note dans la console
 app.get("/", function(req,res){
   res.render("index");
 });
-//
+
 io.sockets.on('connection', function (socket) {
   socket.emit('initmessage', 'Vous etes bien connecte!');
   socket.broadcast.emit('initmessage', 'Un autre client vient de se connecter !');

@@ -1,5 +1,4 @@
-var socket = io.connect();
-
+var socket = io.connect(window.location.hostname);
 function emitToServer(msg){
   socket.emit('message', msg.value);
 }
