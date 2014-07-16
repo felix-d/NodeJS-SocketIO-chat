@@ -10,8 +10,18 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 var mongoose = require('mongoose');
+var os = require('os');
 
-mongoose.connect('mongodb://heroku_app27455666:4v7f8fna0ovu0v8mpl7echvd0k@ds061208.mongolab.com:61208/heroku_app27455666', 
+var database_uri;
+
+//Check if server is localhost to choose database uri
+if(os.hostname().indexOf("local") > -1)
+  database_uri = "mongodb://localhost/chat";
+else
+  database_uri = "mongodb://heroku_app27455666:4v7f8fna0ovu0v8mpl7echvd0k@ds061208.mongolab.com:61208/heroku_app27455666";
+
+//Connect to database
+mongoose.connect(database_uri, 
                  function(err){
                    if(err) console.log(err); 
                    else console.log('success');});
