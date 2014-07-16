@@ -1,38 +1,46 @@
+//===================
+// MAIN APP
+//===================
+
+//Initial configuration
+//Using express framework
+//and socket.io
 var express = require("express");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-console.log("test");
-// var url = require("url");
-// var fs = require('fs');
-// var bodyParser = require('body-parser');
-// var expressjson = require('express-json');
 
+//Set resources folder (css, js, etc..)
 app.use(express.static('public'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded());
+
+//Set views folder to current folder
 app.set("views", ".");
+
+//Set view engine to ejs (because jade is confusing)
 app.set("view engine", "ejs");
-// io.set("transports", ["xhr-polling"]);
-// io.set("polling duration", 10);
 
-var msgs = [];
-// Chargement du fichier index.html affiché au client
-
-var port = process.env.PORT || 5000; // Use the port that Heroku provides or default to 5000
+//Set port to process port or fall back to 5000 (e.g. localhost)
+var port = process.env.PORT || 5000;
 server.listen(port);
 
-// Quand on client se connecte, on le note dans la console
+//Root request
 app.get("/", function(req,res){
   res.render("index");
 });
 
+//True business
 io.sockets.on('connection', function (socket) {
+  
+  //On connection, send this to current client
   socket.emit('initmessage', 'Vous etes bien connecte!');
+  //Send this to other connected clients
   socket.broadcast.emit('initmessage', 'Un autre client vient de se connecter !');
+
+  //On reception of a message
   socket.on('message', function (message) {
-    console.log('Un client me parle ! Il me dit : ' + message);
-    socket.broadcast.emit('broadcast', message);
+    //Send to current client
     socket.emit('broadcast', message);
+    //Broadcast it to other connected clients
+    socket.broadcast.emit('broadcast', message);
   }); 
 });
